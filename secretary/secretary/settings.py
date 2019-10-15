@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import djongo
+import mongoengine
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -75,17 +75,24 @@ WSGI_APPLICATION = 'secretary.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-           'default': {
-            'ENGINE': 'djongo',
-            'ENFORCE_SCHEMA': True,
-            'NAME': 'aia',
-            'HOST': '3.19.143.236',
-            'PORT': 27017,
-            'USER': 'admin',
-            'PASSWORD': 'KyrosAdmin@123',
-
-        }
+    'default': {
+        'ENGINE': '',
     }
+}
+
+MONGO_DATABASE_NAME = 'aia'
+MONGO_HOST = '3.19.143.236'
+MONGO_USER = 'admin'
+MONGO_PWD = 'KyrosAdmin@123'
+MONGO_PORT = 27017
+
+mongoengine.connect(MONGO_DATABASE_NAME,
+    host=MONGO_HOST,
+    port=MONGO_PORT,
+    username=MONGO_USER,
+    password=MONGO_PWD,
+    authentication_source='admin'
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

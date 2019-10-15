@@ -95,7 +95,7 @@
                                         <div class="dropdown-sheets">
                                               <!-- .dropdown-sheet-item -->
                                               <div class="dropdown-sheet-item">
-                                                    <a href="./import-backlog.html" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i class="oi oi-data-transfer-upload"></i></span> <span class="tile-peek">Importar Backlog de Agenda</span></a>
+                                                    <a href="/schedule/impt_backlog" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i class="oi oi-data-transfer-upload"></i></span> <span class="tile-peek">Importar Backlog de Agenda</span></a>
                                                 </div>
                                                 <!-- /.dropdown-sheet-item -->
                                             <!-- .dropdown-sheet-item -->
@@ -164,7 +164,7 @@
                             <ul class="menu">
                                 <!-- .menu-item -->
                                 <li class="menu-item has-active">
-                                    <a href="index.html" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
+                                    <a href="/schedule" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
                                 </li>
                                 <!-- /.menu-item -->
                                 <!-- .menu-item -->
@@ -196,7 +196,7 @@
                                     <ul class="menu">
                                         <li class="menu-subhead">Ações</li>
                                         <li class="menu-item ">
-                                            <a href="./import-backlog.html" class=" menu-link " tabindex="-1 ">Importar Backlog de Agenda</a>
+                                            <a href="/schedule/impt_backlog" class=" menu-link " tabindex="-1 ">Importar Backlog de Agenda</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#" class=" menu-link " tabindex="-1 ">Acionar Agendamento Automâtico</a>
@@ -262,15 +262,6 @@
                         <div class="page-inner ">
 
 
-                            {% if latest_task_list %}
-                                <ul>
-                                {% for task in latest_task_list %}
-                                    <li><a href="#">{{ task.descricao }}</a></li>
-                                {% endfor %}
-                                </ul>
-                            {% else %}
-                                <p>No tasks are available.</p>
-                            {% endif %}
                             <!-- .page-title-bar -->
                             <header class="page-title-bar " style="margin-bottom: 0px; ">
                                 <div class="d-flex flex-column flex-md-row ">
@@ -351,7 +342,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Equipe </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-people "></i></sub> <span class="value ">38</span>
+                                                            <sub><i class="oi oi-people "></i></sub> <span class="value ">{{qtd_equipe}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -363,7 +354,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Pendentes </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="fa fa-tasks "></i></sub> <span class="value ">2</span>
+                                                            <sub><i class="fa fa-tasks "></i></sub> <span class="value ">{{qtd_pendentes}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -376,7 +367,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Finalizadas </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-task "></i></sub> <span class="value ">45</span>
+                                                            <sub><i class="oi oi-task "></i></sub> <span class="value ">{{qtd_finalizadas}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -389,7 +380,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Canceladas </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-thumb-down "></i></sub> <span class="value ">64</span>
+                                                            <sub><i class="oi oi-thumb-down "></i></sub> <span class="value ">{{qtd_canceladas}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -405,7 +396,7 @@
                                                     <span class="badge badge-lg badge-success "><span class="oi oi-media-record pulse mr-1 "></span> Em execução</span>
                                                 </div>
                                                 <p class="metric-value h3 ">
-                                                    <sub><i class="oi oi-timer "></i></sub> <span class="value ">8</span>
+                                                    <sub><i class="oi oi-timer "></i></sub> <span class="value ">{{qtd_execucao}}</span>
                                                 </p>
                                             </a>
                                             <!-- /.metric -->
@@ -621,7 +612,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Backlog </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-list "></i></sub> <span class="value ">38</span>
+                                                            <sub><i class="oi oi-list "></i></sub> <span class="value ">{{qtd_backlog}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -633,7 +624,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Confirmados </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-thumb-up "></i></sub> <span class="value ">12</span>
+                                                            <sub><i class="oi oi-thumb-up "></i></sub> <span class="value ">{{qtd_confirmados}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -645,7 +636,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Reagendados </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-timer "></i></sub> <span class="value ">9</span>
+                                                            <sub><i class="oi oi-timer "></i></sub> <span class="value ">{{qtd_reagendados}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -671,7 +662,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Cancelados pelo Cliente</h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-thumb-down "></i></sub> <span class="value ">12</span>
+                                                            <sub><i class="oi oi-thumb-down "></i></sub> <span class="value ">{{qtd_cancelados_cli}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
@@ -683,7 +674,7 @@
                                                     <a href="# " class="metric metric-bordered align-items-center ">
                                                         <h2 class="metric-label "> Cancelados pelo Sistema </h2>
                                                         <p class="metric-value h3 ">
-                                                            <sub><i class="oi oi-thumb-down "></i></sub> <span class="value ">24</span>
+                                                            <sub><i class="oi oi-thumb-down "></i></sub> <span class="value ">{{qtd_cancelados_sis}}</span>
                                                         </p>
                                                     </a>
                                                     <!-- /.metric -->
