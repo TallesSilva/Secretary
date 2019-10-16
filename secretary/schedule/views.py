@@ -17,11 +17,12 @@ def index(request):
     qtd_cancelados_cli = TimeTable.objects.filter(status='Revogados').count()
     qtd_cancelados_sis = TimeTable.objects.filter(status='Interrompidas').count()
     qtd_execucao = TimeTable.objects.filter(status='Acontecendo').count()
-    qtd_pendentes = qtd_backlog + qtd_confirmados + qtd_reagendados + qtd_inconclusivos + qtd_execucao
+    qtd_pendentes = qtd_confirmados + qtd_reagendados + qtd_inconclusivos + qtd_execucao
     qtd_canceladas = qtd_cancelados_cli + qtd_cancelados_sis
-    
+    AgendamentoAutomatico = False
 
     context = {
+        'AgendamentoAutomatico' : AgendamentoAutomatico,
         'latest_task_list': latest_task_list,
         'qtd_equipe' : qtd_equipe,
         'qtd_pendentes' : qtd_pendentes,
@@ -33,7 +34,8 @@ def index(request):
         'qtd_reagendados': qtd_reagendados,
         'qtd_inconclusivos': qtd_inconclusivos,
         'qtd_cancelados_cli': qtd_cancelados_cli,
-        'qtd_cancelados_sis': qtd_cancelados_sis, 
+        'qtd_cancelados_sis': qtd_cancelados_sis,
+        
     }
     return HttpResponse(template.render(context, request))
 
@@ -44,18 +46,11 @@ def impt_backlog(request):
     return HttpResponse(template.render(context, request))
 
 
-
-
-def simple_upload(request):
-    if request.method == 'POST':
-        person_resource = PersonResource()
-        dataset = Dataset()
-        new_persons = request.FILES['myfile']
-
-        imported_data = dataset.load(new_persons.read())
-        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
-
-        if not result.has_errors():
-            person_resource.import_data(dataset, dry_run=False)  # Actually import now
-
-    return render(request, 'core/simple_upload.html')
+def AgendamentoAutomatico(request): 
+    print('entrou')
+    template = loader.get_template('schedule/index.html')
+    AgendamentoAutomatico = True
+    context = {
+        'AgendamentoAutomatico' : AgendamentoAutomatico,
+    }
+    return HttpResponse(template.render(context, request))

@@ -44,8 +44,6 @@
 
     <body class=" default-skin firefox pace-done">
 
-      
-
         <div class="pace  pace-inactive">
             <div class="pace-progress" style="transform: translate3d(100%, 0px, 0px);" data-progress-text="100%" data-progress="99">
                 <div class="pace-progress-inner"></div>
@@ -100,7 +98,7 @@
                                                 <!-- /.dropdown-sheet-item -->
                                             <!-- .dropdown-sheet-item -->
                                             <div class="dropdown-sheet-item">
-                                                <a href="#" class="tile-wrapper"><span class="tile tile-lg bg-indigo"><i class="oi oi-clock"></i></span> <span class="tile-peek">Acionar Agendamento Automâtico</span></a>
+                                                <a href="/schedule/AgendamentoAutomatico" class="tile-wrapper"><span class="tile tile-lg bg-indigo"><i class="oi oi-clock"></i></span> <span class="tile-peek">Acionar Agendamento Automâtico</span></a>
                                             </div>
                                             <!-- /.dropdown-sheet-item -->
                                             <!-- .dropdown-sheet-item -->
@@ -266,7 +264,15 @@
                             <header class="page-title-bar " style="margin-bottom: 0px; ">
                                 <div class="d-flex flex-column flex-md-row ">
                                     <p class="lead " style="margin-bottom: 0px; ">
-                                        <span class="font-weight-bold ">Olá</span> <span class="d-block text-muted ">Abaixo os acontecimentos da sua empresa </span>
+                                        <ul>
+                                            {%if AgendamentoAutomatico is True %}
+                                                <script>alert('Agendamento True')</script>
+                                            {%else%}
+                                                <script>alert('Agendamento False')</script>
+                                            {%endif%}
+                                            <span class="d-block text-muted ">Olá,</span>
+                                            <span class="d-block text-muted ">Abaixo os acontecimentos da sua empresa </span>
+                                        </ul>
                                     </p>
                                     <div class="ml-auto ">
                                         <!-- .dropdown -->
