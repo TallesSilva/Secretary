@@ -48,6 +48,17 @@ def ImportBacklog(request):
     }
     return HttpResponse(template.render(context, request))
 
+def Calendario(request):
+    template = loader.get_template('schedule/calendario.html')
+
+    suppliers = Supplier.objects.order_by('nome')
+    context = {
+
+        'suppliers': suppliers,
+
+    }
+    return HttpResponse(template.render(context, request))
+
 def AgendamentoAutomatico(request):
     template = loader.get_template('schedule/index.html')
     latest_task_list = Task.objects.order_by('descricao')

@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from constants import (
+from .constants import (
     MONGO_HOST,
     MONGO_PORT,
     MONGO_USER,

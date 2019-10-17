@@ -8,4 +8,5 @@ urlpatterns = [
     path('ImportBacklog/', views.ImportBacklog, name='ImportBacklog'),
     path('AgendamentoAutomatico/', views.AgendamentoAutomatico, name='AgendamentoAutomatico'),
     path('UploadBacklog/', views.UploadBacklog, name='UploadBacklog'),
+    path('calendario/', views.Calendario, name='calendario'),
 ]
