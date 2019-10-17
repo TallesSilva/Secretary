@@ -93,7 +93,7 @@
                                         <div class="dropdown-sheets">
                                               <!-- .dropdown-sheet-item -->
                                               <div class="dropdown-sheet-item">
-                                                    <a href="/schedule/impt_backlog" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i class="oi oi-data-transfer-upload"></i></span> <span class="tile-peek">Importar Backlog de Agenda</span></a>
+                                                    <a href="/schedule/ImportBacklog" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i class="oi oi-data-transfer-upload"></i></span> <span class="tile-peek">Importar Backlog de Agenda</span></a>
                                                 </div>
                                                 <!-- /.dropdown-sheet-item -->
                                             <!-- .dropdown-sheet-item -->
@@ -194,7 +194,7 @@
                                     <ul class="menu">
                                         <li class="menu-subhead">Ações</li>
                                         <li class="menu-item ">
-                                            <a href="/schedule/impt_backlog" class=" menu-link " tabindex="-1 ">Importar Backlog de Agenda</a>
+                                            <a href="/schedule/ImportBacklog" class=" menu-link " tabindex="-1 ">Importar Backlog de Agenda</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#" class=" menu-link " tabindex="-1 ">Acionar Agendamento Automâtico</a>
@@ -258,17 +258,15 @@
                     <div class="page ">
                         <!-- .page-inner -->
                         <div class="page-inner ">
-
-
                             <!-- .page-title-bar -->
                             <header class="page-title-bar " style="margin-bottom: 0px; ">
                                 <div class="d-flex flex-column flex-md-row ">
                                     <p class="lead " style="margin-bottom: 0px; ">
                                         <ul>
                                             {%if AgendamentoAutomatico is True %}
-                                                <script>alert('Agendamento True')</script>
+                                                <p>Agendamento True</p>
                                             {%else%}
-                                                <script>alert('Agendamento False')</script>
+                                                <p>Agendamento False</p>
                                             {%endif%}
                                             <span class="d-block text-muted ">Olá,</span>
                                             <span class="d-block text-muted ">Abaixo os acontecimentos da sua empresa </span>

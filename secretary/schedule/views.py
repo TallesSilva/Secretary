@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.template import loader
-
+import openpyxl
 from .models import Task, TimeTable, Supplier
 from tablib import Dataset
+from django.shortcuts import render
 
 def index(request):
     latest_task_list = Task.objects.order_by('descricao')
@@ -39,8 +40,8 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
-def impt_backlog(request):
-    template = loader.get_template('schedule/impt_backlog.html')
+def ImportBacklog(request):
+    template = loader.get_template('schedule/ImportBacklog.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
@@ -77,3 +78,35 @@ def AgendamentoAutomatico(request):
         'qtd_cancelados_sis': qtd_cancelados_sis,
     }
     return HttpResponse(template.render(context, request))
+
+def UploadBacklog(request):
+    template = loader.get_template('schedule/ImportBacklog.html')
+    context = {
+    }
+
+    if "GET" == request.method:
+        print('get')
+        return HttpResponse(template.render(context, request))
+    else:
+        print('post')
+
+        excel_file = request.FILES["excel_file"]
+        
+        # you may put validations here to check extension or file size
+
+        wb = openpyxl.load_workbook(excel_file)
+
+        # getting a particular sheet by name out of many sheets
+        worksheet = wb.active
+        print(worksheet)
+
+        excel_data = list()
+        # iterating over the rows and
+        # getting value from each cell in row
+        for row in worksheet.iter_rows():
+            row_data = list()
+            for cell in row:
+                row_data.append(str(cell.value))
+                print(cell)
+            excel_data.append(row_data)
+        return HttpResponse(template.render(context, request))
