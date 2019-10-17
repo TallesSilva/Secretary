@@ -74,13 +74,13 @@ class excel:
 
     def insert_backlog_in_db(self):
         try:
-            excel.load_backlog()
-            row, column = excel.max_row_column()
+            ws = excel.load_backlog()
+            row, column = excel.max_row_column(ws)
             for r in range(1, row+1):
-                customer = excel.read_cell(r, 1)
-                supplier = excel.read_cell(r, 2)
-                task = excel.read_cell(r, 3)
-                start_date = excel.read_cell(r, 4)
+                customer = excel.read_cell(ws, r, 1)
+                supplier = excel.read_cell(ws, r, 2)
+                task = excel.read_cell(ws, r, 3)
+                start_date = excel.read_cell(ws, r, 4)
                 if start_date is None:
                     payload = Manage.generate_none_payload_visit(customer, supplier, task)
                 else:
@@ -117,19 +117,18 @@ class excel:
         except:
             print("falha ao validar data")
 
-    def read_cell(self, nrow, ncolumn):
+    def read_cell(self, ws, nrow, ncolumn):
         '''ler celula e retornar data'''
         try:
-            data = self.ws.cell(nrow, ncolumn).value
+            data = ws.cell(nrow, ncolumn).value
             return data
         except:
             
             return None
 
-    def max_row_column(self):
+    def max_row_column(self, ws):
         """retorna o numero maximo de linhas e colunas"""
         try:
-            ws = self.ws
             rows = ws.max_row
             columns = ws.max_column
             return rows, columns

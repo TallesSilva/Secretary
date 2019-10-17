@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.template import loader
 import openpyxl
-from .models import Task, TimeTable, Supplier
+from .models import Task, TimeTable, Supplier, Backlog
 from tablib import Dataset
 from django.shortcuts import render
+from scheduler_agent.manage_backlog import *
+
 
 def index(request):
     latest_task_list = Task.objects.order_by('descricao')
@@ -95,18 +97,20 @@ def UploadBacklog(request):
         # you may put validations here to check extension or file size
 
         wb = openpyxl.load_workbook(excel_file)
+        ws = wb.active
+        row, column = excel.max_row_column(ws)
+        for r in range(1, row+1):
+            customer = excel.read_cell(ws, r, 1)
+            supplier = excel.read_cell(ws, r, 2)
+            task = excel.read_cell(ws, r, 3)
+            start_date = excel.read_cell(ws, r, 4)
+            if start_date is None:
+                payload = Manage.generate_none_payload_visit(customer, supplier, task)
+            else:
+                end_date = Manage.date_sum_hour(start_date, 1)
+                payload = Manage.generate_available_payload_visit(customer, supplier, 'Backlog', 'Instalação de Modem', start_date, end_date)
+            ''' inserir data in mongo '''
+            Backlog.objects.filter(payload).update_one()
 
         # getting a particular sheet by name out of many sheets
-        worksheet = wb.active
-        print(worksheet)
-
-        excel_data = list()
-        # iterating over the rows and
-        # getting value from each cell in row
-        for row in worksheet.iter_rows():
-            row_data = list()
-            for cell in row:
-                row_data.append(str(cell.value))
-                print(cell)
-            excel_data.append(row_data)
         return HttpResponse(template.render(context, request))
