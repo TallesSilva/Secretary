@@ -1,8 +1,8 @@
 import logging
 import json
 import random
-from interfaces import get_mongo_database
-from constants import (
+from .interfaces import get_mongo_database
+from .constants import (
     MONGO_HOST,
     MONGO_PORT,
     MONGO_USER,

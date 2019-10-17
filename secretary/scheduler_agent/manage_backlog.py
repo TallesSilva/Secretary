@@ -1,11 +1,11 @@
 from datetime import (datetime, timedelta)
-from constants import (MONGO_DEFAULT_DB, MONGO_HOST, MONGO_PASS, MONGO_PORT, MONGO_USER)
+from .constants import (MONGO_DEFAULT_DB, MONGO_HOST, MONGO_PASS, MONGO_PORT, MONGO_USER)
 from faker import Faker
-from find_manage import *
-from interfaces import *
-from insert_manage import *
-from fake_profile import *
-from manage_visits import *
+from .find_manage import *
+from .interfaces import *
+from .insert_manage import *
+from .fake_profile import *
+from .manage_visits import *
 import random
 from openpyxl import load_workbook
 import logging
@@ -117,7 +117,7 @@ class excel:
         except:
             print("falha ao validar data")
 
-    def read_cell(self, ws, nrow, ncolumn):
+    def read_cell(ws, nrow, ncolumn):
         '''ler celula e retornar data'''
         try:
             data = ws.cell(nrow, ncolumn).value
@@ -126,7 +126,7 @@ class excel:
             
             return None
 
-    def max_row_column(self, ws):
+    def max_row_column(ws):
         """retorna o numero maximo de linhas e colunas"""
         try:
             rows = ws.max_row

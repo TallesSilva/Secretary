@@ -98,6 +98,7 @@ def UploadBacklog(request):
 
         wb = openpyxl.load_workbook(excel_file)
         ws = wb.active
+        print(ws)
         row, column = excel.max_row_column(ws)
         for r in range(1, row+1):
             customer = excel.read_cell(ws, r, 1)

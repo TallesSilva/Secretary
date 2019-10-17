@@ -1,6 +1,6 @@
 from datetime import (datetime, timedelta)
 from faker import Faker
-from interfaces import *
+from .interfaces import *
 
 fake = Faker('pt_BR')
 
