@@ -291,42 +291,29 @@
                             <p class="text-muted"> Importe seu backlog de agenda. </p><!-- /title -->
 
                         </header><!-- /.page-title-bar -->
-                        <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="file" title="Upload excel file" name="excel_file"
-                                style="border: 1px solid black; padding: 5px;" required="required">
-
-                            <input type="submit" value="Upload Backlog"
-                                style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
-                        </form>
-                        {% for row in excel_data %}
-                        {% for cell in row %}
-                        {{ cell }}&nbsp;&nbsp;
-                        {% endfor %}
-                        <br>
-                        {% endfor %}
-                        <!-- .card -->
                         <div class="card card-fluid">
-                            <!-- .card-body -->
-                            <div id="progress" class="progress progress-xs rounded-0 fade">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                                    role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div><!-- The container for the uploaded files -->
-                            <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
+                                <!-- .card-body -->
+                                <div class="card-body">
+                                  <!-- The fileinput-button span is used to style the file input field as button -->
+                                  <label></label>
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="fileupload-customInput" multiple> <label class="custom-file-label" for="fileupload-customInput">Escolha os arquivos</label>
+                                  </div>
+                                </div><!-- /.card-body -->
+                                <!-- The progress bar -->
+                                <div id="progress" class="progress progress-xs rounded-0 fade">
+                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div><!-- The container for the uploaded files -->
+                                <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
 
-                            <div class="card-body">
-                                <label class="control-label" for="flatpickr07">Escolha um Deadline</label> <input
-                                    id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
-                                    data-mode="range" data-date-format="Y-m-d"
-                                    data-default-dates='["2019-03-03", "2019-03-20"]'>
-                            </div>
-                        </div><!-- /.card -->
-
-                        <div class="ml-auto">
-                            <button type="button" class="btn btn-success">Gerar Timetable</button> <button type="button"
-                                class="btn btn-secondary d-xl-none" data-toggle="sidebar"><i
-                                    class="fas fa-tasks"></i></button>
-                        </div>
+                                <div class="card-body">
+                                    <label class="control-label" for="flatpickr07">Escolha um Deadline</label> <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr" data-mode="range" data-date-format="Y-m-d" data-default-dates='["2019-03-03", "2019-03-20"]'>
+                                  </div>
+                              </div><!-- /.card -->
+                 
+                              <div class="ml-auto">
+                                  <button type="button" class="btn btn-success">Importar</button> <button type="button" class="btn btn-secondary d-xl-none" data-toggle="sidebar"><i class="fas fa-tasks"></i></button>
+                              </div>
 
                     </div><!-- /.page -->
                 </div><!-- .app-footer -->
@@ -360,6 +347,7 @@
         <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload-audio.min.js' %}"></script>
         <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload-video.min.js' %}"></script>
         <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload-validate.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload.min.js' %}"></script>
         <script src="{% static 'assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js' %}"></script>
         <!-- END PLUGINS JS -->
         <!-- BEGIN THEME JS -->
