@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from datetime import datetime
 from mongoengine import Document, fields, EmbeddedDocument
 
 ESTADOS = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG',
@@ -93,7 +93,8 @@ class Task(Document):
 class TimeTable(Document):
     meta = {'strict': False}
 
-    data = fields.StringField(required=True)
+    start_date = fields.StringField(required=True)
+    end_date = fields.StringField(required=True)
     status = fields.StringField(required=True)
     task = fields.StringField(required=True)
     supplier = fields.ReferenceField('Supplier', required=True)
@@ -104,10 +105,10 @@ class TimeTable(Document):
 class Backlog(Document):
     meta = {'strict': False}
 
-    data = fields.StringField(required=True)
+    start_date = fields.StringField(required=False)
     status = fields.StringField(required=True)
     task = fields.StringField(required=True)
     supplier = fields.ReferenceField('Supplier', required=True)
     customer = fields.ReferenceField('Customer', required=True)
     company = fields.ReferenceField('Company', required=True)
-    observacao = fields.StringField(required=True)
+    observacao = fields.StringField(required=False)
