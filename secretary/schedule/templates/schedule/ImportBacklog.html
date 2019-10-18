@@ -310,13 +310,12 @@
 
                             <input type="submit" value="Upload Backlog"
                                 style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+                            <!--    {% if Alert is True %}
+                                    alert('Não foi possivel carregar o arquivo completamente!');
+                                {% else %}
+                                    alert('O arquivo foi incluido com sucesso!')
+                                {%endif%}   -->
                         </form>
-                        {% for row in excel_data %}
-                        {% for cell in row %}
-                        {{ cell }}&nbsp;&nbsp;
-                        {% endfor %}
-                        <br>
-                        {% endfor %}
                         <!-- .card -->
                         <div class="card card-fluid">
                             <!-- .card-body -->
@@ -325,19 +324,20 @@
                                     role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                             </div><!-- The container for the uploaded files -->
                             <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
-
-                            <div class="card-body">
-                                <label class="control-label" for="flatpickr07">Escolha um Deadline</label> <input
-                                    id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
-                                    data-mode="range" data-date-format="Y-m-d"
-                                    data-default-dates='["2019-03-03", "2019-03-20"]'>
-                            </div>
+                            <form action="{% url "GerarTimetable" %}" method="GET">
+                                <div class="card-body">
+                                    <label class="control-label" for="flatpickr07">Escolha um Deadline</label>
+                                    <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
+                                        data-mode="range" data-date-format="Y-m-d" name=data-default-dates
+                                        data-default-dates='["2019-03-03", "2019-03-20"]'>
+                                </div>
                         </div><!-- /.card -->
 
                         <div class="ml-auto">
-                            <button type="button" class="btn btn-success">Gerar Timetable</button> <button type="button"
-                                class="btn btn-secondary d-xl-none" data-toggle="sidebar"><i
-                                    class="fas fa-tasks"></i></button>
+
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Gerar Timetable</button>
+                            </form>
                         </div>
 
                     </div><!-- /.page -->
