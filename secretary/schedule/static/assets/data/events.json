@@ -1,13 +1,13 @@
 [
   {
-    "title": "Redesign website",
+    "title": "Trocar Modem",
     "start": "2019-10-01",
     "textColor": "rgb(52, 108, 176)",
     "backgroundColor": "rgba(52, 108, 176, .12)",
     "borderColor": "rgb(52, 108, 176)"
   },
   {
-    "title": "Write new content",
+    "title": "Instalação TV",
     "start": "2019-10-07",
     "end": "2019-10-10",
     "textColor": "rgb(0, 162, 138)",
@@ -24,7 +24,7 @@
   },
   {
     "id": 999,
-    "title": "Review",
+    "title": "Nova Instalação GPON",
     "start": "2019-10-16T16:00:00",
     "textColor": "rgb(0, 162, 138)",
     "backgroundColor": "rgba(0, 162, 138, .12)",
