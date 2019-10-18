@@ -92,33 +92,25 @@
                             <!-- /.nav-item -->
                             <!-- .nav-item -->
                             <li class="nav-item dropdown header-nav-dropdown">
-                                <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false"><span class="oi oi-grid-three-up"></span></a>
+                                <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-grid-three-up"></span></a>
                                 <!-- .dropdown-menu -->
                                 <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
                                     <div class="dropdown-arrow"></div>
                                     <!-- .dropdown-sheets -->
                                     <div class="dropdown-sheets">
+                                          <!-- .dropdown-sheet-item -->
+                                          <div class="dropdown-sheet-item">
+                                                <a href="/schedule/ImportBacklog" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i class="oi oi-data-transfer-upload"></i></span> <span class="tile-peek">Importar Backlog de Agenda</span></a>
+                                            </div>
+                                            <!-- /.dropdown-sheet-item -->
                                         <!-- .dropdown-sheet-item -->
                                         <div class="dropdown-sheet-item">
-                                            <a href="/schedule/ImportBacklog" class="tile-wrapper"><span
-                                                    class="tile tile-lg bg-pink"><i
-                                                        class="oi oi-data-transfer-upload"></i></span> <span
-                                                    class="tile-peek">Importar Backlog de Agenda</span></a>
+                                            <a href="/schedule/AgendamentoAutomatico" class="tile-wrapper"><span class="tile tile-lg bg-indigo"><i class="oi oi-clock"></i></span> <span class="tile-peek">Acionar Agendamento Automâtico</span></a>
                                         </div>
                                         <!-- /.dropdown-sheet-item -->
                                         <!-- .dropdown-sheet-item -->
                                         <div class="dropdown-sheet-item">
-                                            <a href="#" class="tile-wrapper"><span class="tile tile-lg bg-indigo"><i
-                                                        class="oi oi-clock"></i></span> <span class="tile-peek">Acionar
-                                                    Agendamento Automâtico</span></a>
-                                        </div>
-                                        <!-- /.dropdown-sheet-item -->
-                                        <!-- .dropdown-sheet-item -->
-                                        <div class="dropdown-sheet-item">
-                                            <a href="./calendario.html" class="tile-wrapper"><span
-                                                    class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span>
-                                                <span class="tile-peek">Consultar Agenda</span></a>
+                                            <a href="/schedule/calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
                                         </div>
                                         <!-- /.dropdown-sheet-item -->
                                     </div>
@@ -221,26 +213,22 @@
                             <!-- /.menu-item -->
                             <!-- .menu-item -->
                             <li class="menu-item has-child">
-                                <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span
-                                        class="menu-text">Ações</span></a>
+                                <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span class="menu-text">Ações</span></a>
                                 <!-- child menu -->
                                 <ul class="menu">
                                     <li class="menu-subhead">Ações</li>
                                     <li class="menu-item ">
-                                        <a href="/schedule/ImportBacklog " class=" menu-link " tabindex="-1 ">Importar
-                                            Backlog de Agenda</a>
+                                        <a href="/schedule/ImportBacklog" class=" menu-link " tabindex="-1 ">Importar Backlog de Agenda</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="#" class=" menu-link " tabindex="-1 ">Acionar Agendamento
-                                            Automâtico</a>
+                                        <a href="/schedule/AgendamentoAutomatico" class=" menu-link " tabindex="-1 ">Acionar Agendamento Automâtico</a>
                                     </li>
                                     <li class="menu-item ">
-                                        <a href="./calendario.html" class=" menu-link " tabindex="-1 ">Consultar
-                                            Agenda</a>
+                                        <a href="/schedule/calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
                                     </li>
                                 </ul>
                                 <!-- /child menu -->
-                            </li>
+                            </li>>
                             <!-- /.menu-item -->
                             <!-- .menu-item -->
                             <li class="menu-item has-child ">
@@ -372,6 +360,7 @@
         <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload-audio.min.js' %}"></script>
         <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload-video.min.js' %}"></script>
         <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload-validate.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/blueimp-file-upload/js/jquery.fileupload.min.js' %}"></script>
         <script src="{% static 'assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js' %}"></script>
         <!-- END PLUGINS JS -->
         <!-- BEGIN THEME JS -->
