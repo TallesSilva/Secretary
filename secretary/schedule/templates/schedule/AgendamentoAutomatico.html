@@ -110,7 +110,7 @@
                                         <!-- /.dropdown-sheet-item -->
                                         <!-- .dropdown-sheet-item -->
                                         <div class="dropdown-sheet-item">
-                                            <a href="/schedule/calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
+                                            <a href="/schedule/Calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
                                         </div>
                                         <!-- /.dropdown-sheet-item -->
                                     </div>
@@ -224,11 +224,11 @@
                                         <a href="/schedule/AgendamentoAutomatico" class=" menu-link " tabindex="-1 ">Acionar Agendamento Automâtico</a>
                                     </li>
                                     <li class="menu-item ">
-                                        <a href="/schedule/calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
+                                        <a href="/schedule/Calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
                                     </li>
                                 </ul>
                                 <!-- /child menu -->
-                            </li>>
+                            </li>
                             <!-- /.menu-item -->
                             <!-- .menu-item -->
                             <li class="menu-item has-child ">
@@ -287,23 +287,9 @@
                         <!-- .page-title-bar -->
                         <header class="page-title-bar">
                             <!-- title -->
-                            <h1 class="page-title"> Importar Backlog </h1>
-                            <p class="text-muted">  de agenda. </p><!-- /title -->
+                            <h1 class="page-title"> Acionar Agendamento </h1>
 
                         </header><!-- /.page-title-bar -->
-                        <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="file" title="Upload excel file" name="excel_file"
-                                style="border: 1px solid black; padding: 5px;" required="required">
-
-                            <input type="submit" value="Upload Backlog"
-                                style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
-                            <!--    {% if Alert is True %}
-                                    alert('Não foi possivel carregar o arquivo completamente!');
-                                {% else %}
-                                    alert('O arquivo foi incluido com sucesso!')
-                                {%endif%}   -->
-                        </form>
                         <!-- .card -->
                         <div class="card card-fluid">
                             <!-- .card-body -->
@@ -312,7 +298,7 @@
                                     role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                             </div><!-- The container for the uploaded files -->
                             <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
-                            <form action="{% url "GerarTimetable" %}" method="GET">
+                            <form action="{% url "ContactarCliente" %}" method="GET">
                                 <div class="card-body">
                                     <label class="control-label" for="flatpickr07">Escolha um Deadline</label>
                                     <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
@@ -324,7 +310,7 @@
                         <div class="ml-auto">
 
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-success">Gerar Timetable</button>
+                            <button type="submit" class="btn btn-success">Acionar</button>
                             </form>
                         </div>
 

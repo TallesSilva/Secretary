@@ -6,9 +6,12 @@ from tablib import Dataset
 from django.shortcuts import render
 from scheduler_agent.manage_backlog import *
 from datetime import datetime
+import requests
+from json import loads, dumps
 
 
 def index(request):
+    '''           LOAD PAGE          '''
     latest_task_list = Task.objects.order_by('descricao')
     
     template = loader.get_template('schedule/index.html')
@@ -45,12 +48,14 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def ImportBacklog(request):
+    '''           LOAD PAGE          '''
     template = loader.get_template('schedule/ImportBacklog.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
 
 def Calendario(request):
+    '''           LOAD PAGE          '''
     template = loader.get_template('schedule/calendario.html')
 
     suppliers = Supplier.objects.order_by('nome')
@@ -62,39 +67,14 @@ def Calendario(request):
     return HttpResponse(template.render(context, request))
 
 def AgendamentoAutomatico(request):
-    template = loader.get_template('schedule/index.html')
-    latest_task_list = Task.objects.order_by('descricao')
-    qtd_equipe = Supplier.objects.count()
-    qtd_finalizadas = TimeTable.objects.filter(status = 'Finalizados').count()
-    qtd_backlog = Backlog.objects.count()
-    qtd_confirmados = TimeTable.objects.filter(status='Confirmado').count()
-    qtd_reagendados = TimeTable.objects.filter(status='Reagendado').count()
-    qtd_inconclusivos = TimeTable.objects.filter(status='Inconclusivo').count()
-    qtd_cancelados_cli = TimeTable.objects.filter(status='Revogados').count()
-    qtd_cancelados_sis = TimeTable.objects.filter(status='Interrompidas').count()
-    qtd_execucao = TimeTable.objects.filter(status='Acontecendo').count()
-    qtd_pendentes = qtd_confirmados + qtd_reagendados + qtd_inconclusivos + qtd_execucao
-    qtd_canceladas = qtd_cancelados_cli + qtd_cancelados_sis
-    AgendamentoAutomatico = True
+    '''           LOAD PAGE          '''
+    template = loader.get_template('schedule/AgendamentoAutomatico.html')
     context = {
-        'AgendamentoAutomatico' : AgendamentoAutomatico,
-        'AgendamentoAutomatico' : AgendamentoAutomatico,
-        'latest_task_list': latest_task_list,
-        'qtd_equipe' : qtd_equipe,
-        'qtd_pendentes' : qtd_pendentes,
-        'qtd_finalizadas' : qtd_finalizadas,
-        'qtd_canceladas' : qtd_canceladas,
-        'qtd_execucao' : qtd_execucao,
-        'qtd_backlog': qtd_backlog,
-        'qtd_confirmados': qtd_confirmados,
-        'qtd_reagendados': qtd_reagendados,
-        'qtd_inconclusivos': qtd_inconclusivos,
-        'qtd_cancelados_cli': qtd_cancelados_cli,
-        'qtd_cancelados_sis': qtd_cancelados_sis,
     }
     return HttpResponse(template.render(context, request))
 
 def UploadBacklog(request):
+    '''           LOAD FUNCTION BUTTON UPLOAD EXCEL FILE TO MONGO          '''
     try:
         template = loader.get_template('schedule/ImportBacklog.html')
         context = {
@@ -137,26 +117,37 @@ def UploadBacklog(request):
         }
         return HttpResponse(template.render(context, request))
 
-def GerarTimetable(request):
+def ContactarCliente(request):
+    '''           LOAD FUNCTION BUTTON ACIONAR CONTACT CLIENT          '''
     try:
+        template = loader.get_template('schedule/AgendamentoAutomatico.html')
+        context = {
+        }
         if "POST" == request.method:
-            print('aqui')
             return HttpResponse(template.render(context, request))
         else:
-            
-            template = loader.get_template('schedule/ImportBacklog.html')
+            template = loader.get_template('schedule/AgendamentoAutomatico.html')
             context = {
                 'Alerta' : False,
             }
             date = request.GET['data-default-dates']
             start_date = datetime.strptime(date[0:10], "%Y-%m-%d")
             end_date = datetime.strptime(date[-10:], "%Y-%m-%d")
-            excel.generate_timetable_with_backlog(start_date, end_date)
+            params = {'include_events': 'ALL',
+                      'output_channel': 'telegram'}
+            conversation_id = '976620455'
+            payload = {"name": "utter_greet"}
+            r = requests.post('http://127.0.0.1:5005/conversations/{}/execute'.format(conversation_id),
+                              params = params,
+                              data = dumps(payload))
+            print(start_date, end_date)
             return HttpResponse(template.render(context, request))
     except:
-        template = loader.get_template('schedule/ImportBacklog.html')
+        template = loader.get_template('schedule/AgendamentoAutomatico.html')
         context = {
             'Alerta' : True,
         }
         return HttpResponse(template.render(context, request))
+    
+
 
