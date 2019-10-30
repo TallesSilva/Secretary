@@ -112,3 +112,5 @@ class Backlog(Document):
     customer = fields.ReferenceField('Customer', required=True)
     company = fields.ReferenceField('Company', required=True)
     observacao = fields.StringField(required=False)
+    deadline_start_date = fields.StringField(required=False)
+    deadline_end_date = fields.StringField(required=False)

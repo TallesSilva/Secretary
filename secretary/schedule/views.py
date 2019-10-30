@@ -74,6 +74,7 @@ def AgendamentoAutomatico(request):
     return HttpResponse(template.render(context, request))
 
 def UploadBacklog(request):
+    print('Entrou *******************')
     '''           LOAD FUNCTION BUTTON UPLOAD EXCEL FILE TO MONGO          '''
     try:
         template = loader.get_template('schedule/ImportBacklog.html')
@@ -82,19 +83,26 @@ def UploadBacklog(request):
         if "GET" == request.method:
             return HttpResponse(template.render(context, request))
         else:
+            print('Entrou2 *******************')
             excel_file = request.FILES["excel_file"]
+            date = request.POST['data-default-dates']
+            deadline_start_date = datetime.strptime(date[0:10], "%d-%m-%Y")
+            deadline_end_date = datetime.strptime(date[-10:], "%d-%m-%Y")
+            print(deadline_start_date)
+            print(deadline_end_date)
             # you may put validations here to check extension or file size
             wb = openpyxl.load_workbook(excel_file)
             ws = wb.active
             print(ws)
+            
             row, column = excel.max_row_column(ws)
             for r in range(1, row+1):
                 customer = excel.read_cell(ws, r, 1)
                 supplier = excel.read_cell(ws, r, 2)
                 task = excel.read_cell(ws, r, 3)
                 start_date = excel.read_cell(ws, r, 4)
-                if start_date is None:
-                    start_date = None
+                if start_date is None or start_date == '' :
+                    start_date = ''
                 else:
                     start_date = start_date.strftime( "%Y-%m-%dT%H")
                     '''inserir data in mongo '''
@@ -106,6 +114,8 @@ def UploadBacklog(request):
                     customer = customer,
                     company = '5d6020abd12e66a47a7888ed',
                     observacao = None,
+                    deadline_start_date = deadline_start_date.strftime( "%Y-%m-%dT%H"),
+                    deadline_end_date = deadline_end_date.strftime( "%Y-%m-%dT%H")
                 ).save()
             context = {
                 'Alert' : False,
