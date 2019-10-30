@@ -8,6 +8,7 @@ from scheduler_agent.manage_backlog import *
 from datetime import datetime
 import requests
 from json import loads, dumps
+from django.utils.timezone import datetime,timedelta
 
 
 def index(request):
@@ -28,6 +29,11 @@ def index(request):
     qtd_pendentes = qtd_confirmados + qtd_reagendados + qtd_inconclusivos + qtd_execucao + qtd_pendentes
     qtd_canceladas = qtd_cancelados_cli + qtd_cancelados_sis
     AgendamentoAutomatico = False
+    dpToday = datetime.today().strftime( "%d %b")
+    dpYesterday = (datetime.today() - timedelta(days=1)).strftime( "%d %b")
+    dpWeek = datetime.today().strftime( "%d")
+    dpMonth = datetime.today().strftime( "%B")
+    dpYear = datetime.today().strftime( "%Y")
 
     context = {
         'AgendamentoAutomatico' : AgendamentoAutomatico,
@@ -43,7 +49,11 @@ def index(request):
         'qtd_inconclusivos': qtd_inconclusivos,
         'qtd_cancelados_cli': qtd_cancelados_cli,
         'qtd_cancelados_sis': qtd_cancelados_sis,
-        
+        'dpToday': dpToday,
+        'dpYesterday': dpYesterday,
+        'dpWeek': dpWeek,
+        'dpMonth': dpMonth,
+        'dpYear': dpYear,
     }
     return HttpResponse(template.render(context, request))
 
