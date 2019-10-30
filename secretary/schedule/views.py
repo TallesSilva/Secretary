@@ -60,7 +60,9 @@ def index(request):
 def ImportBacklog(request):
     '''           LOAD PAGE          '''
     template = loader.get_template('schedule/ImportBacklog.html')
+    status_import = ''
     context = {
+        'status_import': status_import,
     }
     return HttpResponse(template.render(context, request))
 
@@ -115,6 +117,7 @@ def UploadBacklog(request):
         template = loader.get_template('schedule/ImportBacklog.html')
         context = {
         }
+        status_import = ''
         if "GET" == request.method:
             return HttpResponse(template.render(context, request))
         else:
@@ -152,13 +155,17 @@ def UploadBacklog(request):
                     deadline_start_date = deadline_start_date.strftime( "%Y-%m-%dT%H"),
                     deadline_end_date = deadline_end_date.strftime( "%Y-%m-%dT%H")
                 ).save()
+            status_import = 'Success'
             context = {
                 'Alert' : False,
+                'status_import': status_import,
             }
             return HttpResponse(template.render(context, request))
     except:
+        status_import = 'Success'
         context = {
             'Alerta' : True,
+            'status_import': status_import,
         }
         return HttpResponse(template.render(context, request))
 

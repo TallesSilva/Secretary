@@ -288,57 +288,73 @@
                         <header class="page-title-bar">
                             <!-- title -->
                             <h1 class="page-title"> Importar Backlog de Agenda </h1>
-
-                        </header><!-- /.page-title-bar -->
-                        <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-
-                            <div class="card card-fluid">
-                                <!-- .card-body -->
-                                <div id="progress" class="progress progress-xs rounded-0 fade">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                                        role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div><!-- The container for the uploaded files -->
-                                <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
-                                    <div class="card-body">
-                                        <label class="control-label" for="flatpickr07">Escolha um arquivo</label>
-
-                                        <input type="file" title="Upload excel file" name="excel_file"
-                                        id="flatpickr07" class="form-control" required="required">
-
-                                    </div>
-                            </div><!-- /.card -->
-
                            
 
-                            <!--    {% if Alert is True %}
-                                    alert('Não foi possivel carregar o arquivo completamente!');
-                                {% else %}
-                                    alert('O arquivo foi incluido com sucesso!')
-                                {%endif%}   -->
-                        
-
-                        <div class="card card-fluid">
-                            <!-- .card-body -->
-                            <div id="progress" class="progress progress-xs rounded-0 fade">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                                    role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div><!-- The container for the uploaded files -->
-                            <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
-                                <div class="card-body">
-                                    <label class="control-label" for="flatpickr07">Escolha um Deadline</label>
-                                    <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
-                                        data-mode="range" data-date-format="d-m-Y" name=data-default-dates
-                                        data-default-dates='["01-10-2019", "31-10-2019"]'>
-                                </div>
-                        </div><!-- /.card -->
-
-                        <div class="ml-auto">
+                            {% if status_import == 'Success' %}
+                                
+                            <div class="section-block">
+                                <div class="alert alert-success has-icon alert-dismissible fade show">
+                                  <button type="button" class="close" data-dismiss="alert">×</button>
+                                  <div class="alert-icon">
+                                    <span class="oi oi-flag"></span>
+                                  </div>
+                                  <h4 class="alert-heading"> Sucesso! </h4>
+                                  <p class="mb-0"> Backlog importado com sucesso. </p>
+                                </div><!-- grid row -->
+                              </div>
+                            {% elif status_import == 'Error' %}
+                              <div class="section-block">
+                                <div class="alert alert-danger has-icon alert-dismissible fade show">
+                                  <button type="button" class="close" data-dismiss="alert">×</button>
+                                  <div class="alert-icon">
+                                    <span class="oi oi-flag"></span>
+                                  </div>
+                                  <h4 class="alert-heading"> Erro! </h4>
+                                  <p class="mb-0"> Backlog importado com erro. Tente novamente. </p>
+                                </div><!-- grid row -->
+                              </div>  
+                                
+                            {% else %}
+                                <li>Sorry, no athletes in this list.</li>
+                            {% endif %}
 
                             
-                            <button type="submit" class="btn btn-success">Importar</button>
-                            </form>
-                        </div>
+                              
+
+
+                        </header><!-- /.page-title-bar -->
+                        <div class="card card-fluid">
+                            <!-- .form -->
+                            <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                              <!-- .fieldset -->
+                              <fieldset class="card-body">
+                                
+                                <!-- .form-group -->
+                                <div class="form-group">
+                                  <label class="control-label" for="tf3">Arquivo</label>
+                                  <div class="custom-file">
+                                    <input type="file" title="Upload excel file" name="excel_file" id="flatpickr07" class="custom-file-input" required="required"> <label class="custom-file-label" for="tf3">Escolha um arquivo</label>
+                                  </div>
+                                </div><!-- /.form-group -->
+                                <div class="form-group">
+                                  <label class="control-label" for="tf6">Backlog</label>
+                                  <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
+                                        data-mode="range" data-date-format="d-m-Y" name=data-default-dates
+                                        data-default-dates='["01-10-2019", "31-10-2019"]'>
+                                </div><!-- /.form-group -->
+                                <!-- .form-group -->
+
+                                <div class="ml-auto">                         
+                                    <button type="submit" class="btn btn-success">Importar</button>
+                                </div>
+
+                              </fieldset><!-- /.fieldset -->
+                                
+                            </form><!-- /.form -->
+                          </div>
+
+                        
 
                         <!-- .card -->
                     </div><!-- /.page -->
