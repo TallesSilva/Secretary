@@ -90,8 +90,8 @@ class Manage:
         """Retorna um payload da visita."""
         try:
             payload_timetable = {
-            "start_date": None,
-            "end_date": None,
+            "start_date": '',
+            "end_date": '',
             "status": 'Backlog',
             "observacao": '',
             "task": task,
