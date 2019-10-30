@@ -67,11 +67,36 @@ def Calendario(request):
     return HttpResponse(template.render(context, request))
 
 def AgendamentoAutomatico(request):
-    '''           LOAD PAGE          '''
-    template = loader.get_template('schedule/AgendamentoAutomatico.html')
-    context = {
-    }
-    return HttpResponse(template.render(context, request))
+    '''           LOAD FUNCTION BUTTON ACIONAR CONTACT CLIENT          '''
+    try:
+        template = loader.get_template('schedule/AgendamentoAutomatico.html')
+        context = {
+        }
+        if "POST" == request.method:
+            return HttpResponse(template.render(context, request))
+        else:
+            template = loader.get_template('schedule/AgendamentoAutomatico.html')
+            context = {
+                'Alerta' : False,
+            }
+            date = request.GET['data-default-dates']
+            start_date = datetime.strptime(date[0:10], "%Y-%m-%d")
+            end_date = datetime.strptime(date[-10:], "%Y-%m-%d")
+            params = {'include_events': 'ALL',
+                      'output_channel': 'telegram'}
+            conversation_id = '895005814'
+            payload = {"name": "utter_greet"}
+            r = requests.post('http://127.0.0.1:5005/conversations/{}/execute'.format(conversation_id),
+                              params = params,
+                              data = dumps(payload))
+            print(start_date, end_date)
+            return HttpResponse(template.render(context, request))
+    except:
+        template = loader.get_template('schedule/AgendamentoAutomatico.html')
+        context = {
+            'Alerta' : True,
+        }
+        return HttpResponse(template.render(context, request))
 
 def UploadBacklog(request):
     print('Entrou *******************')
@@ -127,37 +152,12 @@ def UploadBacklog(request):
         }
         return HttpResponse(template.render(context, request))
 
-def ContactarCliente(request):
-    '''           LOAD FUNCTION BUTTON ACIONAR CONTACT CLIENT          '''
-    try:
-        template = loader.get_template('schedule/AgendamentoAutomatico.html')
-        context = {
-        }
-        if "POST" == request.method:
-            return HttpResponse(template.render(context, request))
-        else:
-            template = loader.get_template('schedule/AgendamentoAutomatico.html')
-            context = {
-                'Alerta' : False,
-            }
-            date = request.GET['data-default-dates']
-            start_date = datetime.strptime(date[0:10], "%Y-%m-%d")
-            end_date = datetime.strptime(date[-10:], "%Y-%m-%d")
-            params = {'include_events': 'ALL',
-                      'output_channel': 'telegram'}
-            conversation_id = '895005814'
-            payload = {"name": "utter_greet"}
-            r = requests.post('http://127.0.0.1:5005/conversations/{}/execute'.format(conversation_id),
-                              params = params,
-                              data = dumps(payload))
-            print(start_date, end_date)
-            return HttpResponse(template.render(context, request))
-    except:
-        template = loader.get_template('schedule/AgendamentoAutomatico.html')
-        context = {
-            'Alerta' : True,
-        }
-        return HttpResponse(template.render(context, request))
+
+
+   
+
+
+
     
 
 
