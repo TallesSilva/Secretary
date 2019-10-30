@@ -315,7 +315,7 @@
                               </div>  
                                 
                             {% else %}
-                                <li>Sorry, no athletes in this list.</li>
+                                
                             {% endif %}
 
                             
@@ -323,9 +323,16 @@
 
 
                         </header><!-- /.page-title-bar -->
+
+                        <script>
+                            function loading() {
+                               document.getElementById("loading_button").style.visibility = "visible";
+                            }
+                        </script>
+
                         <div class="card card-fluid">
                             <!-- .form -->
-                            <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data">
+                            <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data" onsubmit="loading()">
                                 {% csrf_token %}
                               <!-- .fieldset -->
                               <fieldset class="card-body">
@@ -347,6 +354,7 @@
 
                                 <div class="ml-auto">                         
                                     <button type="submit" class="btn btn-success">Importar</button>
+                                    <button id="loading_button" style="visibility:hidden;" class="btn btn-primary" type="button" disabled=""><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Carregando...</button>
                                 </div>
 
                               </fieldset><!-- /.fieldset -->
