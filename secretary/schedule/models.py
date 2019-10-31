@@ -22,6 +22,7 @@ class Endereco(EmbeddedDocument):
     estado = fields.StringField(required=True)
     latitude = fields.StringField(required=True)
     longitude = fields.StringField(required=True)
+    
 
 class Contato(EmbeddedDocument):
     meta = {'strict': False}

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
 import openpyxl
-from .models import Task, TimeTable, Supplier, Backlog
+from .models import Task, TimeTable, Supplier, Backlog, Customer
 from tablib import Dataset
 from django.shortcuts import render
 from scheduler_agent.manage_backlog import *
@@ -31,8 +31,8 @@ def index(request):
     AgendamentoAutomatico = False
     dpToday = datetime.today().strftime( "%d %b")
     dpYesterday = (datetime.today() - timedelta(days=1)).strftime( "%d %b")
-    dpWeek = datetime.today().strftime( "%d")
-    dpMonth = datetime.today().strftime( "%B")
+    dpWeek = (datetime.today() - timedelta(days=int(datetime.today().strftime( "%w")))).strftime( "%d") + ' - ' + datetime.today().strftime( "%d %b")
+    dpMonth = '1' + ' - ' + datetime.today().strftime( "%d %b")
     dpYear = datetime.today().strftime( "%Y")
 
     context = {
@@ -68,7 +68,7 @@ def ImportBacklog(request):
 
 def Calendario(request):
     '''           LOAD PAGE          '''
-    template = loader.get_template('schedule/calendario.html')
+    template = loader.get_template('schedule/Calendario.html')
 
     suppliers = Supplier.objects.order_by('nome')
     context = {
@@ -168,6 +168,16 @@ def UploadBacklog(request):
             'status_import': status_import,
         }
         return HttpResponse(template.render(context, request))
+
+def Clientes(request):
+    template = loader.get_template('schedule/Clientes.html')
+
+    customers = Customer.objects()
+
+    context = {
+        'customers': customers
+    }
+    return HttpResponse(template.render(context, request))
 
 
 
