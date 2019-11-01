@@ -58,10 +58,13 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def ImportBacklog(request):
+    print('ImportBacklog')
     '''           LOAD PAGE          '''
     template = loader.get_template('schedule/ImportBacklog.html')
     status_import = ''
+    backlogs = Backlog.objects()
     context = {
+        'backlogs': backlogs,
         'status_import': status_import,
     }
     return HttpResponse(template.render(context, request))
@@ -79,6 +82,7 @@ def Calendario(request):
     return HttpResponse(template.render(context, request))
 
 def AgendamentoAutomatico(request):
+    print('AgendamentoAutomatico')
     '''           LOAD FUNCTION BUTTON ACIONAR CONTACT CLIENT          '''
     try:
         template = loader.get_template('schedule/AgendamentoAutomatico.html')
@@ -91,27 +95,25 @@ def AgendamentoAutomatico(request):
             context = {
                 'Alerta' : False,
             }
-            date = request.GET['data-default-dates']
-            start_date = datetime.strptime(date[0:10], "%Y-%m-%d")
-            end_date = datetime.strptime(date[-10:], "%Y-%m-%d")
             params = {'include_events': 'ALL',
                       'output_channel': 'telegram'}
             conversation_id = '895005814'
             payload = {"name": "utter_greet"}
-            r = requests.post('http://127.0.0.1:5005/conversations/{}/execute'.format(conversation_id),
+            r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
                               params = params,
                               data = dumps(payload))
-            print(start_date, end_date)
+            print('AgendamentoAutomatico2') 
+            print(r)                 
             return HttpResponse(template.render(context, request))
     except:
-        template = loader.get_template('schedule/AgendamentoAutomatico.html')
+        template = loader.get_template('schedule/Erro.html')
         context = {
             'Alerta' : True,
         }
         return HttpResponse(template.render(context, request))
 
 def UploadBacklog(request):
-    print('Entrou *******************')
+    print('UploadBacklog')
     '''           LOAD FUNCTION BUTTON UPLOAD EXCEL FILE TO MONGO          '''
     try:
         template = loader.get_template('schedule/ImportBacklog.html')
@@ -121,7 +123,6 @@ def UploadBacklog(request):
         if "GET" == request.method:
             return HttpResponse(template.render(context, request))
         else:
-            print('Entrou2 *******************')
             excel_file = request.FILES["excel_file"]
             date = request.POST['data-default-dates']
             deadline_start_date = datetime.strptime(date[0:10], "%d-%m-%Y")
@@ -156,7 +157,9 @@ def UploadBacklog(request):
                     deadline_end_date = deadline_end_date.strftime( "%Y-%m-%dT%H")
                 ).save()
             status_import = 'Success'
+            backlogs = Backlog.objects()
             context = {
+                'backlogs': backlogs,
                 'Alert' : False,
                 'status_import': status_import,
             }
