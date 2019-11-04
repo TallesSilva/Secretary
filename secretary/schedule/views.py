@@ -74,9 +74,12 @@ def Calendario(request):
     template = loader.get_template('schedule/Calendario.html')
 
     suppliers = Supplier.objects.order_by('nome')
+
+    events = '[{"title":"Trocar Modem","start":"2019-11-12","textColor":"rgb(52, 108, 176)","backgroundColor":"rgba(52,108,176,.12)","borderColor": "rgb(52,108,176)"}]'
     context = {
 
         'suppliers': suppliers,
+        'teste':events
 
     }
     return HttpResponse(template.render(context, request))
@@ -95,15 +98,20 @@ def AgendamentoAutomatico(request):
             context = {
                 'Alerta' : False,
             }
-            params = {'include_events': 'ALL',
+
+            backlogs= Backlog.objects()
+
+            for backlog in backlogs:
+                params = {'include_events': 'ALL',
                       'output_channel': 'telegram'}
-            conversation_id = '895005814'
-            payload = {"name": "utter_greet"}
-            r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
+                conversation_id = backlog.customer.contato.telegram
+                payload = {"name": "utter_greet"}
+                r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
                               params = params,
                               data = dumps(payload))
-            print('AgendamentoAutomatico2') 
-            print(r)                 
+                print('AgendamentoAutomatico2') 
+                print(r)  
+
             return HttpResponse(template.render(context, request))
     except:
         template = loader.get_template('schedule/Erro.html')
