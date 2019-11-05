@@ -103,7 +103,7 @@
                                             <!-- /.dropdown-sheet-item -->
                                             <!-- .dropdown-sheet-item -->
                                             <div class="dropdown-sheet-item">
-                                                <a href="/schedule/calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
+                                                <a href="/schedule/Calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
                                             </div>
                                             <!-- /.dropdown-sheet-item -->
                                         </div>
@@ -172,7 +172,7 @@
                                     <ul class="menu">
                                         <li class="menu-subhead">Cadastros</li>
                                         <li class="menu-item">
-                                            <a href="./clientes.html" class="menu-link" tabindex="-1">Clientes</a>
+                                            <a href="/schedule/Clientes" class="menu-link" tabindex="-1">Clientes</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#" class="menu-link" tabindex="-1">Tarefas</a>
@@ -200,7 +200,7 @@
                                             <a href="/schedule/AgendamentoAutomatico" class=" menu-link " tabindex="-1 ">Acionar Agendamento Automâtico</a>
                                         </li>
                                         <li class="menu-item ">
-                                            <a href="/schedule/calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
+                                            <a href="/schedule/Calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
                                         </li>
                                     </ul>
                                     <!-- /child menu -->
@@ -263,11 +263,6 @@
                                 <div class="d-flex flex-column flex-md-row ">
                                     <p class="lead " style="margin-bottom: 0px; ">
                                         <ul>
-                                            {%if AgendamentoAutomatico is True %}
-                                                <p>Agendamento True</p>
-                                            {%else%}
-                                                <p>Agendamento False</p>
-                                            {%endif%}
                                             <span class="d-block text-muted ">Olá,</span>
                                             <span class="d-block text-muted ">Abaixo os acontecimentos da sua empresa </span>
                                         </ul>
@@ -281,28 +276,27 @@
                                                 <div class="dropdown-arrow"></div>
                                                 <!-- .custom-control -->
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="dpToday" name="dpFilter" data-start="2019/03/27" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpToday"><span>Hoje</span> <span class="text-muted">Mar 27</span></label>
+                                                    <input type="radio" class="custom-control-input" id="dpToday" name="dpFilter" data-start="2019/03/27" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpToday"><span>Hoje</span> <span class="text-muted">{{dpToday}}</span></label>
                                                 </div>
                                                 <!-- /.custom-control -->
                                                 <!-- .custom-control -->
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="dpYesterday" name="dpFilter" data-start="2019/03/26" data-end="2019/03/26"> <label class="custom-control-label d-flex justify-content-between" for="dpYesterday"><span>Ontem</span> <span class="text-muted">Mar 26</span></label>
+                                                    <input type="radio" class="custom-control-input" id="dpYesterday" name="dpFilter" data-start="2019/03/26" data-end="2019/03/26"> <label class="custom-control-label d-flex justify-content-between" for="dpYesterday"><span>Ontem</span> <span class="text-muted">{{dpYesterday}}</span></label>
                                                 </div>
                                                 <!-- /.custom-control -->
                                                 <!-- .custom-control -->
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="dpWeek" name="dpFilter" data-start="2019/03/21" data-end="2019/03/27" checked> <label class="custom-control-label d-flex justify-content-between"
-                                                        for="dpWeek"><span>Nesta Semana</span> <span class="text-muted">Mar 21-27</span></label>
+                                                    <input type="radio" class="custom-control-input" id="dpWeek" name="dpFilter" data-start="2019/03/21" data-end="2019/03/27" checked> <label class="custom-control-label d-flex justify-content-between" for="dpWeek"><span>Nesta Semana</span> <span class="text-muted">{{dpWeek}}</span></label>
                                                 </div>
                                                 <!-- /.custom-control -->
                                                 <!-- .custom-control -->
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="dpMonth" name="dpFilter" data-start="2019/03/01" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpMonth"><span>Neste Mês</span> <span class="text-muted">Mar 1-31</span></label>
+                                                    <input type="radio" class="custom-control-input" id="dpMonth" name="dpFilter" data-start="2019/03/01" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpMonth"><span>Neste Mês</span> <span class="text-muted">{{dpMonth}}</span></label>
                                                 </div>
                                                 <!-- /.custom-control -->
                                                 <!-- .custom-control -->
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="dpYear" name="dpFilter" data-start="2019/01/01" data-end="2019/12/31"> <label class="custom-control-label d-flex justify-content-between" for="dpYear"><span>Neste Ano</span> <span class="text-muted">2019</span></label>
+                                                    <input type="radio" class="custom-control-input" id="dpYear" name="dpFilter" data-start="2019/01/01" data-end="2019/12/31"> <label class="custom-control-label d-flex justify-content-between" for="dpYear"><span>Neste Ano</span> <span class="text-muted">{{dpYear}}</span></label>
                                                 </div>
                                                 <!-- /.custom-control -->
                                                 <!-- .custom-control -->

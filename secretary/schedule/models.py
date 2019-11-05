@@ -22,6 +22,7 @@ class Endereco(EmbeddedDocument):
     estado = fields.StringField(required=True)
     latitude = fields.StringField(required=True)
     longitude = fields.StringField(required=True)
+    
 
 class Contato(EmbeddedDocument):
     meta = {'strict': False}
@@ -112,3 +113,5 @@ class Backlog(Document):
     customer = fields.ReferenceField('Customer', required=True)
     company = fields.ReferenceField('Company', required=True)
     observacao = fields.StringField(required=False)
+    deadline_start_date = fields.StringField(required=False)
+    deadline_end_date = fields.StringField(required=False)
