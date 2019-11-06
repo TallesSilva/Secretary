@@ -9,6 +9,5 @@ urlpatterns = [
     path('UploadBacklog/', views.UploadBacklog, name='UploadBacklog'),
     path('Calendario/', views.Calendario, name='Calendario'),
     path('AgendamentoAutomatico/', views.AgendamentoAutomatico, name='AgendamentoAutomatico'),    
-    path('Clientes/', views.Clientes, name='Clientes'),    
-    
+    path('Clientes/', views.Clientes, name='Clientes'),
 ]
