@@ -74,7 +74,7 @@ def Calendario(request):
     template = loader.get_template('schedule/Calendario.html')
 
     suppliers = Supplier.objects.order_by('nome')
-    
+
     events = '[{"title":"Trocar Modem","start":"2019-11-12","textColor":"rgb(52, 108, 176)","backgroundColor":"rgba(52,108,176,.12)","borderColor": "rgb(52,108,176)"}]'
     context = {
 
@@ -110,7 +110,7 @@ def AgendamentoAutomatico(request):
                               params = params,
                               data = dumps(payload))
                 print('AgendamentoAutomatico2') 
-                print(r)  
+               # print(backlog.ObjectIdField())  
 
             return HttpResponse(template.render(context, request))
     except:
