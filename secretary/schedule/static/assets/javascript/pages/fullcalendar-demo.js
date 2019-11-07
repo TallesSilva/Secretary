@@ -9,7 +9,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // FullCalendar Demo
 // =============================================================
 var fcTheme = FullCalendar.Theme;
-
+alert(teste)
 var LooperCalendarTheme = function (fcTheme) {
   function LooperCalendarTheme() {
     fcTheme.apply(this, arguments);
@@ -93,7 +93,7 @@ function () {
         editable: true,
         eventLimit: true,
         // allow "more" link when too many events
-        events: '/static/assets/data/events.json',
+        events: teste,
         viewRender: function viewRender(view, element) {
           // update today button state :disabled
           var isToday = $('#calendar').fullCalendar('getDate').format('YYYY-MM-DD') === moment().format('YYYY-MM-DD');
@@ -137,7 +137,7 @@ function () {
         editable: false,
         eventLimit: false,
         // allow "more" link when too many events
-        events: '/static/assets/data/events.json',
+        events: teste,
         eventRender: function eventRender(event, element) {
           element.find('.fc-event-dot').css('background-color', event.borderColor);
         }

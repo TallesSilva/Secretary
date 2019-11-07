@@ -75,13 +75,23 @@ def Calendario(request):
 
     suppliers = Supplier.objects.order_by('nome')
 
-    events = '[{"title":"Trocar Modem","start":"2019-11-12","textColor":"rgb(52, 108, 176)","backgroundColor":"rgba(52,108,176,.12)","borderColor": "rgb(52,108,176)"}]'
+    events = [
+  {
+    "title": "Trocar Modem",
+    "start": "2019-11-18",
+    "textColor": "rgb(52, 108, 176)",
+    "backgroundColor": "rgba(52, 108, 176, .12)",
+    "borderColor": "rgb(52, 108, 176)"
+  }
+]
+
     context = {
 
         'suppliers': suppliers,
         'teste':events
 
     }
+        
     return HttpResponse(template.render(context, request))
 
 def AgendamentoAutomatico(request):
@@ -104,14 +114,19 @@ def AgendamentoAutomatico(request):
             for backlog in backlogs:
                 params = {'include_events': 'ALL',
                       'output_channel': 'telegram',
-                              'backlog' : backlog.id}
+}
                 conversation_id = backlog.customer.contato.telegram
                 payload = {"name": "utter_greet"}
+                payload_mes = {"text": str(backlog.id),
+                               "sender": "user"}
                 r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
-                              params = params,
-                              data = dumps(payload))
+                                  params = params,
+                                  data = dumps(payload))
+                r2 = requests.post('http://192.168.0.190:5005/conversations/{}/messages'.format(conversation_id),
+                                   params = params,
+                                   data = dumps(payload_mes))
                 print('AgendamentoAutomatico2') 
-                print(backlog.id)  
+                print(backlog.id)
 
             return HttpResponse(template.render(context, request))
     except NameError:
