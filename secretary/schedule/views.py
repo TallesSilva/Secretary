@@ -22,7 +22,7 @@ def index(request):
     qtd_confirmados = TimeTable.objects.filter(status='Confirmado').count()
     qtd_reagendados = TimeTable.objects.filter(status='Reagendado').count()
     qtd_inconclusivos = TimeTable.objects.filter(status='Inconclusivo').count()
-    qtd_cancelados_cli = TimeTable.objects.filter(status='Revogados').count()
+    qtd_cancelados_cli = TimeTable.objects.filter(status='Revogado').count()
     qtd_cancelados_sis = TimeTable.objects.filter(status='Interrompida').count()
     qtd_execucao = TimeTable.objects.filter(status='Acontecendo').count()
     qtd_pendentes = TimeTable.objects.filter(status='Pendente').count()
@@ -74,17 +74,40 @@ def Calendario(request):
     template = loader.get_template('schedule/Calendario.html')
 
     suppliers = Supplier.objects.order_by('nome')
+    timetables = TimeTable.objects()
+    print(len(timetables))
 
-    events = [
-  {
-    "title": "Trocar Modem",
-    "start": "2019-11-18",
-    "textColor": "rgb(52, 108, 176)",
-    "backgroundColor": "rgba(52, 108, 176, .12)",
-    "borderColor": "rgb(52, 108, 176)"
-  }
-]
+    json_calendario = '['
+    i = 1
+    for timetable in timetables:
+        print(i)
+        json_calendario = json_calendario + '{'
+        json_calendario = json_calendario + '"title": "' + timetable.task + '",'
+        json_calendario = json_calendario + '"start": "' + timetable.start_date + '",'
+        json_calendario = json_calendario + '"end": "' + timetable.end_date + '",'
+        if timetable.status == 'Confirmado' or timetable.status == 'Reagendado' :
+            json_calendario = json_calendario + '"textColor": "rgb(0, 162, 138)",'
+            json_calendario = json_calendario + '"backgroundColor": "rgba(0, 162, 138, .12)",'
+            json_calendario = json_calendario + '"borderColor": "rgb(0, 162, 138)"'
+        elif timetable.status == 'Revogado':
+            json_calendario = json_calendario + '"textColor": "rgb(183, 107, 163)",'
+            json_calendario = json_calendario + '"backgroundColor": "rgba(183, 107, 163, .12)",'
+            json_calendario = json_calendario + '"borderColor": "rgb(183, 107, 163)"'
+        else:
+            json_calendario = json_calendario + '"textColor": "rgb(249, 172, 47)",'
+            json_calendario = json_calendario + '"backgroundColor": "rgba(249, 172, 47, .12)",'
+            json_calendario = json_calendario + '"borderColor": "rgb(249, 172, 47)"'
+            
+        
+        if i == len(timetables):
+            json_calendario = json_calendario + '}'
+        else :
+            json_calendario = json_calendario + '},'
+        
+        i = i + 1
+    json_calendario = json_calendario +']'
 
+    events = json_calendario
     context = {
 
         'suppliers': suppliers,
