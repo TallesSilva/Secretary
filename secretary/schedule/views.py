@@ -74,10 +74,38 @@ def Calendario(request):
     template = loader.get_template('schedule/Calendario.html')
 
     suppliers = Supplier.objects.order_by('nome')
+    timetables = TimeTable.objects()
+    print(len(timetables))
 
+    json_calendario = '['
+    i = 1
+    for timetable in timetables:
+        print(i)
+        json_calendario = json_calendario + '{'
+        json_calendario = json_calendario + '"title": "' + timetable.task + '",'
+        json_calendario = json_calendario + '"start": "' + timetable.start_date + '",'
+        json_calendario = json_calendario + '"end": "' + timetable.end_date + '",'
+        json_calendario = json_calendario + '"textColor": "rgb(1, 121, 168)",'
+        if timetable.status == 'Confirmado':
+            json_calendario = json_calendario + '"backgroundColor": "rgba(1, 121, 168, .12)",'
+        elif timetable.status == 'Reagendado':
+            json_calendario = json_calendario + '"backgroundColor": "rgba(190, 190, 40, .12)",'
+        elif timetable.status == 'Revogado':
+            json_calendario = json_calendario + '"backgroundColor": "rgba(190, 0, 0, .12)",'
+        json_calendario = json_calendario + '"borderColor": "rgb(1, 121, 168)"'
+        if i == len(timetables):
+            json_calendario = json_calendario + '}'
+        else :
+            json_calendario = json_calendario + '},'
+        
+        i = i + 1
+    json_calendario = json_calendario +']'
+
+    events = json_calendario
     context = {
 
         'suppliers': suppliers,
+        'teste':events
 
     }
     return HttpResponse(template.render(context, request))

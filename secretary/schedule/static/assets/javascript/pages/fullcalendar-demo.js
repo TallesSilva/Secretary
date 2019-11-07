@@ -69,7 +69,6 @@ function decodeHtml(html) {
     return txt.value;
 }
 
-
 var FullcalendarDemo =
     /*#__PURE__*/
     function() {
@@ -108,7 +107,7 @@ var FullcalendarDemo =
                     editable: true,
                     eventLimit: true,
                     // allow "more" link when too many events
-                    events: 'assets/data/events.json',
+                    events: event_aux,
                     viewRender: function viewRender(view, element) {
                         // update today button state :disabled
                         var isToday = $('#calendar').fullCalendar('getDate').format('YYYY-MM-DD') === moment().format('YYYY-MM-DD');
@@ -152,7 +151,7 @@ var FullcalendarDemo =
                     editable: false,
                     eventLimit: false,
                     // allow "more" link when too many events
-                    events: 'assets/data/events.json',
+                    events: event_aux,
                     eventRender: function eventRender(event, element) {
                         element.find('.fc-event-dot').css('background-color', event.borderColor);
                     }
