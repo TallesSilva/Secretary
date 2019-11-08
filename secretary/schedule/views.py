@@ -164,7 +164,7 @@ def UploadBacklog(request):
     print('UploadBacklog')
     '''           LOAD FUNCTION BUTTON UPLOAD EXCEL FILE TO MONGO          '''
     try:
-        template = loader.get_template('schedule/ImportBacklog.html')
+        template = loader.get_template('schedule/UploadBacklog.html')
         context = {
         }
         status_import = ''
