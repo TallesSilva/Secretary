@@ -63,19 +63,13 @@ def ImportBacklog(request):
     template = loader.get_template('schedule/ImportBacklog.html')
     status_import = ''
     backlogs = Backlog.objects()
-    deadline_start = datetime.now()
-    deadline_start_str = deadline_start.strftime("%d-%m-%y")
-    deadline_end = (deadline_start + timedelta(days = 30) )
-    deadline_end_str = deadline_end.strftime("%d-%m-%y")
-    deadline = [deadline_start_str, deadline_end_str]
-    #deadline = '["01-10-2019", "31-10-2019"]'
-    print(deadline)
+    des_deadline = '[' + datetime.today().strftime( "%d-%b-%Y") + ' , ' + ((datetime.today() + timedelta(days=7)).strftime( "%d-%b-%Y") ) + ']' 
+
+    print (des_deadline)
     context = {
         'backlogs': backlogs,
         'status_import': status_import,
-        'deadline_start': deadline_start_str,
-        'deadline_end': deadline_end_str,
-        'deadline': deadline
+        'des_deadline' : des_deadline
     }
     return HttpResponse(template.render(context, request))
 
@@ -168,7 +162,7 @@ def AgendamentoAutomatico(request):
 def UploadBacklog(request):
     '''           LOAD FUNCTION BUTTON UPLOAD EXCEL FILE TO MONGO          '''
     try:
-        template = loader.get_template('schedule/ImportBacklog.html')
+        template = loader.get_template('schedule/UploadBacklog.html')
         context = {
         }
         status_import = ''
