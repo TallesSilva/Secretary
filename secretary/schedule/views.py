@@ -63,9 +63,13 @@ def ImportBacklog(request):
     template = loader.get_template('schedule/ImportBacklog.html')
     status_import = ''
     backlogs = Backlog.objects()
+    des_deadline = '[' + datetime.today().strftime( "%d-%b-%Y") + ' , ' + ((datetime.today() + timedelta(days=7)).strftime( "%d-%b-%Y") ) + ']' 
+
+    print (des_deadline)
     context = {
         'backlogs': backlogs,
         'status_import': status_import,
+        'des_deadline' : des_deadline
     }
     return HttpResponse(template.render(context, request))
 
