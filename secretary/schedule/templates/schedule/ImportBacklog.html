@@ -110,7 +110,7 @@
                                         <!-- /.dropdown-sheet-item -->
                                         <!-- .dropdown-sheet-item -->
                                         <div class="dropdown-sheet-item">
-                                            <a href="/schedule/calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
+                                            <a href="/schedule/Calendario" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i class="oi oi-calendar"></i></span> <span class="tile-peek">Consultar Agenda</span></a>
                                         </div>
                                         <!-- /.dropdown-sheet-item -->
                                     </div>
@@ -196,7 +196,7 @@
                                 <ul class="menu">
                                     <li class="menu-subhead">Cadastros</li>
                                     <li class="menu-item">
-                                        <a href="./clientes.html" class="menu-link" tabindex="-1">Clientes</a>
+                                        <a href="/schedule/Clientes" class="menu-link" tabindex="-1">Clientes</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="#" class="menu-link" tabindex="-1">Tarefas</a>
@@ -224,11 +224,11 @@
                                         <a href="/schedule/AgendamentoAutomatico" class=" menu-link " tabindex="-1 ">Acionar Agendamento Automâtico</a>
                                     </li>
                                     <li class="menu-item ">
-                                        <a href="/schedule/calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
+                                        <a href="/schedule/Calendario" class=" menu-link " tabindex="-1 ">Consultar Agenda</a>
                                     </li>
                                 </ul>
                                 <!-- /child menu -->
-                            </li>>
+                            </li>
                             <!-- /.menu-item -->
                             <!-- .menu-item -->
                             <li class="menu-item has-child ">
@@ -287,34 +287,125 @@
                         <!-- .page-title-bar -->
                         <header class="page-title-bar">
                             <!-- title -->
-                            <h1 class="page-title"> Importar Backlog </h1>
-                            <p class="text-muted"> Importe seu backlog de agenda. </p><!-- /title -->
+                            <h1 class="page-title"> Importar Backlog de Agenda </h1>
+                           
+
+                            {% if status_import == 'Success' %}
+                                
+                            <div class="section-block">
+                                <div class="alert alert-success has-icon alert-dismissible fade show">
+                                  <button type="button" class="close" data-dismiss="alert">×</button>
+                                  <div class="alert-icon">
+                                    <span class="oi oi-flag"></span>
+                                  </div>
+                                  <h4 class="alert-heading"> Sucesso! </h4>
+                                  <p class="mb-0"> Backlog importado com sucesso. </p>
+                                </div><!-- grid row -->
+                              </div>
+                            {% elif status_import == 'Error' %}
+                              <div class="section-block">
+                                <div class="alert alert-danger has-icon alert-dismissible fade show">
+                                  <button type="button" class="close" data-dismiss="alert">×</button>
+                                  <div class="alert-icon">
+                                    <span class="oi oi-flag"></span>
+                                  </div>
+                                  <h4 class="alert-heading"> Erro! </h4>
+                                  <p class="mb-0"> Backlog importado com erro. Tente novamente. </p>
+                                </div><!-- grid row -->
+                              </div>  
+                                
+                            {% else %}
+                                
+                            {% endif %}
+
+                            
+                              
+
 
                         </header><!-- /.page-title-bar -->
+
+                        <script>
+                            function loading() {
+                               document.getElementById("loading_button").style.visibility = "visible";
+                            }
+                        </script>
+
                         <div class="card card-fluid">
-                                <!-- .card-body -->
-                                <div class="card-body">
-                                  <!-- The fileinput-button span is used to style the file input field as button -->
-                                  <label></label>
+                            <!-- .form -->
+                            <form action="{% url "UploadBacklog" %}" method="post" enctype="multipart/form-data" onsubmit="loading()">
+                                {% csrf_token %}
+                              <!-- .fieldset -->
+                              <fieldset class="card-body">
+                                
+                                <!-- .form-group -->
+                                <div class="form-group">
+                                  <label class="control-label" for="tf3">Arquivo</label>
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="fileupload-customInput" multiple> <label class="custom-file-label" for="fileupload-customInput">Escolha os arquivos</label>
+                                    <input type="file" title="Upload excel file" name="excel_file" id="flatpickr07" class="custom-file-input" required="required"> <label class="custom-file-label" for="tf3">Escolha um arquivo</label>
                                   </div>
-                                </div><!-- /.card-body -->
-                                <!-- The progress bar -->
-                                <div id="progress" class="progress progress-xs rounded-0 fade">
-                                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div><!-- The container for the uploaded files -->
-                                <div id="uploadList" class="list-group list-group-flush list-group-divider"></div>
+                                </div><!-- /.form-group -->
+                                <div class="form-group">
+                                  <label class="control-label" for="tf6">Deadline</label>
+                                  <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr"
+                                        data-mode="range" data-date-format="d-m-Y" name=data-default-dates
+                                        data-default-dates='["01-10-2019", "31-10-2019"]'>
+                                </div><!-- /.form-group -->
+                                <!-- .form-group -->
 
-                                <div class="card-body">
-                                    <label class="control-label" for="flatpickr07">Escolha um Deadline</label> <input id="flatpickr07" type="text" class="form-control" data-toggle="flatpickr" data-mode="range" data-date-format="Y-m-d" data-default-dates='["2019-03-03", "2019-03-20"]'>
-                                  </div>
-                              </div><!-- /.card -->
-                 
-                              <div class="ml-auto">
-                                  <button type="button" class="btn btn-success">Importar</button> <button type="button" class="btn btn-secondary d-xl-none" data-toggle="sidebar"><i class="fas fa-tasks"></i></button>
-                              </div>
+                                <div class="ml-auto">                         
+                                    <button type="submit" class="btn btn-success">Importar</button>
+                                    <button id="loading_button" style="visibility:hidden;" class="btn btn-primary" type="button" disabled=""><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Carregando...</button>
+                                </div>
 
+                              </fieldset><!-- /.fieldset -->
+                                
+                            </form><!-- /.form -->
+                          </div> 
+                          
+                          
+                          <!-- .page-section -->
+                <div class="page-section">
+                        <!-- .card -->
+                        <div class="card card-fluid">
+                          <!-- .card-body -->
+                          <div class="card-body">
+                            <!-- .table -->
+                            <table id="dt-responsive" class="table dt-responsive nowrap w-100">
+                              <thead>
+                                <tr>
+                                        <th> Cliente </th>
+                                        <th> Tecnico </th>
+                                        <th> Serviço </th>
+                                        <th> Data </th>
+                                </tr>
+                              </thead>
+      
+                              <tbody>
+      
+                                  {% for backlog in backlogs %}
+                                  <tr role="row" class="odd">
+                                      <td class="sorting_1" tabindex="0">{{backlog.customer.nome}} </td>
+                                      <td>{{backlog.supplier.nome}}</td>
+                                      <td> {{backlog.task}}</td>
+                                      <td>{{backlog.start_date}}</td>
+                                  </tr>
+                                {% endfor %}
+                                
+                              <tfoot>
+                                <tr>
+                                        <th> Cliente </th>
+                                        <th> Tecnico </th>
+                                        <th> Serviço </th>
+                                        <th> Data </th>
+                                </tr>
+                              </tfoot>
+                        
+                            </table><!-- /.table -->
+                          </div><!-- /.card-body -->
+                        </div><!-- /.card -->
+                      </div><!-- /.page-section -->
+
+                        <!-- .card -->
                     </div><!-- /.page -->
                 </div><!-- .app-footer -->
                 <footer class="app-footer ">

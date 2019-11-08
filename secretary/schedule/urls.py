@@ -6,7 +6,8 @@ urlpatterns = [
     # ex: /schedule/
     path('', views.index, name='index'),
     path('ImportBacklog/', views.ImportBacklog, name='ImportBacklog'),
-    path('AgendamentoAutomatico/', views.AgendamentoAutomatico, name='AgendamentoAutomatico'),
     path('UploadBacklog/', views.UploadBacklog, name='UploadBacklog'),
-    path('calendario/', views.Calendario, name='calendario'),
+    path('Calendario/', views.Calendario, name='Calendario'),
+    path('AgendamentoAutomatico/', views.AgendamentoAutomatico, name='AgendamentoAutomatico'),    
+    path('Clientes/', views.Clientes, name='Clientes'),
 ]
