@@ -70,99 +70,12 @@ function decodeHtml(html) {
 }
 
 var FullcalendarDemo =
-<<<<<<< HEAD
-/*#__PURE__*/
-function () {
-  function FullcalendarDemo() {
-    _classCallCheck(this, FullcalendarDemo);
-
-    this.init();
-  }
-
-  _createClass(FullcalendarDemo, [{
-    key: "init",
-    value: function init() {
-      // event handlers
-      this.handleCalendarList();
-      this.handleCalendar();
-    }
-  }, {
-    key: "handleCalendar",
-    value: function handleCalendar() {
-      var capitalize = function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      };
-      
-
-      $('#calendar').fullCalendar({
-        themeSystem: 'looper',
-        header: {
-          left: 'title',
-          center: '',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        defaultView: 'month',
-        height: 'auto',
-        navLinks: true,
-        // can click day/week names to navigate views
-        editable: true,
-        eventLimit: true,
-        // allow "more" link when too many events
-        events: teste,
-        viewRender: function viewRender(view, element) {
-          // update today button state :disabled
-          var isToday = $('#calendar').fullCalendar('getDate').format('YYYY-MM-DD') === moment().format('YYYY-MM-DD');
-
-          if (isToday) {
-            $('#calendar-today').attr('disabled', 'disabled');
-          } else {
-            $('#calendar-today').removeAttr('disabled');
-          } // update calendar list view
-
-
-          var listType = "list".concat(capitalize(view.viewSpec.durationUnit));
-          var range = listType === 'listDay' ? moment(view.start._i).format('YYYY-MM-DD') : {
-            start: moment(view.start._i).format('YYYY-MM-DD'),
-            end: moment(view.end._i).format('YYYY-MM-DD')
-          };
-          $('#calendar-list').fullCalendar('changeView', listType, range);
-        }
-      }); // hook the event from our buttons
-
-      $('#calendar-prev').on('click', function () {
-        $('#calendar, #calendar-list').fullCalendar('prev');
-      });
-      $('#calendar-today').on('click', function () {
-        $('#calendar, #calendar-list').fullCalendar('today');
-      });
-      $('#calendar-next').on('click', function () {
-        $('#calendar, #calendar-list').fullCalendar('next');
-      });
-    }
-  }, {
-    key: "handleCalendarList",
-    value: function handleCalendarList() {
-      $('#calendar-list').fullCalendar({
-        themeSystem: 'looper',
-        header: false,
-        defaultView: 'listMonth',
-        height: 'auto',
-        navLinks: false,
-        // can click day/week names to navigate views
-        editable: false,
-        eventLimit: false,
-        // allow "more" link when too many events
-        events: teste,
-        eventRender: function eventRender(event, element) {
-          element.find('.fc-event-dot').css('background-color', event.borderColor);
-=======
     /*#__PURE__*/
     function() {
         function FullcalendarDemo() {
             _classCallCheck(this, FullcalendarDemo);
 
             this.init();
->>>>>>> 891d6fdf8937bcf239af9b62828f47cfbce928b1
         }
 
         _createClass(FullcalendarDemo, [{

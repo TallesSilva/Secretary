@@ -1,12 +1,13 @@
+import requests
+import openpyxl
+
 from django.http import HttpResponse
 from django.template import loader
-import openpyxl
 from .models import Task, TimeTable, Supplier, Backlog, Customer
 from tablib import Dataset
 from django.shortcuts import render
 from scheduler_agent.manage_backlog import *
-from datetime import datetime
-import requests
+from datetime import datetime, timedelta
 from json import loads, dumps
 from django.utils.timezone import datetime,timedelta
 
@@ -58,14 +59,17 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def ImportBacklog(request):
-    print('ImportBacklog')
     '''           LOAD PAGE          '''
     template = loader.get_template('schedule/ImportBacklog.html')
     status_import = ''
     backlogs = Backlog.objects()
+    des_deadline = '[' + datetime.today().strftime( "%d-%b-%Y") + ' , ' + ((datetime.today() + timedelta(days=7)).strftime( "%d-%b-%Y") ) + ']' 
+
+    print (des_deadline)
     context = {
         'backlogs': backlogs,
         'status_import': status_import,
+        'des_deadline' : des_deadline
     }
     return HttpResponse(template.render(context, request))
 
@@ -75,12 +79,10 @@ def Calendario(request):
 
     suppliers = Supplier.objects.order_by('nome')
     timetables = TimeTable.objects()
-    print(len(timetables))
 
     json_calendario = '['
     i = 1
     for timetable in timetables:
-        print(i)
         json_calendario = json_calendario + '{'
         json_calendario = json_calendario + '"title": "' + timetable.task + '",'
         json_calendario = json_calendario + '"start": "' + timetable.start_date + '",'
@@ -118,7 +120,6 @@ def Calendario(request):
     return HttpResponse(template.render(context, request))
 
 def AgendamentoAutomatico(request):
-    print('AgendamentoAutomatico')
     '''           LOAD FUNCTION BUTTON ACIONAR CONTACT CLIENT          '''
     try:
         template = loader.get_template('schedule/AgendamentoAutomatico.html')
@@ -146,11 +147,14 @@ def AgendamentoAutomatico(request):
                 r2 = requests.post('http://192.168.0.190:5005/conversations/{}/messages'.format(conversation_id),
                                    params = params,
                                    data = dumps(payload_mes))
+<<<<<<< HEAD
                 r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
                                   params = params,
                                   data = dumps(payload))
                 print('AgendamentoAutomatico2') 
                 print(backlog.id)
+=======
+>>>>>>> 595453b2e203ad1d6614eef15d11748ce9097e50
 
             return HttpResponse(template.render(context, request))
     except NameError:
@@ -162,10 +166,9 @@ def AgendamentoAutomatico(request):
         return HttpResponse(template.render(context, request))
 
 def UploadBacklog(request):
-    print('UploadBacklog')
     '''           LOAD FUNCTION BUTTON UPLOAD EXCEL FILE TO MONGO          '''
     try:
-        template = loader.get_template('schedule/ImportBacklog.html')
+        template = loader.get_template('schedule/UploadBacklog.html')
         context = {
         }
         status_import = ''
@@ -176,12 +179,9 @@ def UploadBacklog(request):
             date = request.POST['data-default-dates']
             deadline_start_date = datetime.strptime(date[0:10], "%d-%m-%Y")
             deadline_end_date = datetime.strptime(date[-10:], "%d-%m-%Y")
-            print(deadline_start_date)
-            print(deadline_end_date)
             # you may put validations here to check extension or file size
             wb = openpyxl.load_workbook(excel_file)
             ws = wb.active
-            print(ws)
             
             row, column = excel.max_row_column(ws)
             for r in range(1, row+1):
