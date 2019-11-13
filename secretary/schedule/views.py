@@ -147,14 +147,11 @@ def AgendamentoAutomatico(request):
                 r2 = requests.post('http://192.168.0.190:5005/conversations/{}/messages'.format(conversation_id),
                                    params = params,
                                    data = dumps(payload_mes))
-<<<<<<< HEAD
                 r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
                                   params = params,
                                   data = dumps(payload))
                 print('AgendamentoAutomatico2') 
                 print(backlog.id)
-=======
->>>>>>> 595453b2e203ad1d6614eef15d11748ce9097e50
 
             return HttpResponse(template.render(context, request))
     except NameError:
