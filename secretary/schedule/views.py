@@ -63,9 +63,10 @@ def ImportBacklog(request):
     template = loader.get_template('schedule/ImportBacklog.html')
     status_import = ''
     backlogs = Backlog.objects()
-    des_deadline = '[' + datetime.today().strftime( "%d-%b-%Y") + ' , ' + ((datetime.today() + timedelta(days=7)).strftime( "%d-%b-%Y") ) + ']' 
-
-    print (des_deadline)
+    des_deadline = '["' + datetime.today().strftime("%d-%m-%Y") + '" , " ' + ((datetime.today() + timedelta(days=7)).strftime("%d-%m-%Y") ) + '"]'
+    [13-11-2019 , 20-11-2019]
+    ["01-10-2019", "31-10-2019"]
+    print(des_deadline)
     context = {
         'backlogs': backlogs,
         'status_import': status_import,
