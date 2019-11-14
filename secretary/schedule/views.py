@@ -142,12 +142,6 @@ def AgendamentoAutomatico(request):
 }
                 conversation_id = backlog.customer.contato.telegram
                 payload = {"name": "utter_greet"}
-                backlog_number = str(backlog.id)
-                payload_mes = {"text": backlog_number,
-                               "sender": "user"}
-                r2 = requests.post('http://192.168.0.190:5005/conversations/{}/messages'.format(conversation_id),
-                                   params = params,
-                                   data = dumps(payload_mes))
                 r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
                                   params = params,
                                   data = dumps(payload))
