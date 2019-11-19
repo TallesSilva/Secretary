@@ -139,19 +139,18 @@ def AgendamentoAutomatico(request):
             for backlog in backlogs:
                 params = {'include_events': 'ALL',
                       'output_channel': 'telegram',
-                }
+}
                 conversation_id = backlog.customer.contato.telegram
-                # payload = {"name": "utter_greet"}
-                # r = requests.post('http://192.168.1.22:5005/conversations/{}/execute'.format(conversation_id),
-                #                     params = params,
-                #                     data = dumps(payload))
-                payloadR =  {
-                            "text": "oi",
-                            "sender": "user",
-                            }
-                r = requests.post('http://192.168.1.22:5005/conversations/{}/messages'.format(conversation_id),
-                                    params = params,
-                                    data = dumps(payloadR))
+                payload = {"name": "utter_greet"}
+                backlog_number = str(backlog.id)
+                payload_mes = {"text": backlog_number,
+                               "sender": "user"}
+                r2 = requests.post('http://localhost:5005/conversations/{}/messages'.format(conversation_id),
+                                   params = params,
+                                   data = dumps(payload_mes))
+                r = requests.post('http://localhost:5005/conversations/{}/execute'.format(conversation_id),
+                                  params = params,
+                                  data = dumps(payload))
                 print('AgendamentoAutomatico2') 
                 print(backlog.id)
 
