@@ -142,10 +142,10 @@ def AgendamentoAutomatico(request):
                 payload = {"name": "utter_greet"}
                 payload_mes = {"text": str(backlog.id),
                                "sender": "user"}
-                r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
+                r = requests.post('http://localhost:5005/conversations/{}/execute'.format(conversation_id),
                                   params = params,
                                   data = dumps(payload))
-                r2 = requests.post('http://192.168.0.190:5005/conversations/{}/messages'.format(conversation_id),
+                r2 = requests.post('http://localhost:5005/conversations/{}/messages'.format(conversation_id),
                                    params = params,
                                    data = dumps(payload_mes))
                 print('AgendamentoAutomatico2') 
