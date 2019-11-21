@@ -33,6 +33,7 @@ class Contato(EmbeddedDocument):
     site = fields.StringField(required=True)
     whatsapp = fields.StringField(required=True)
     telegram = fields.StringField(required=True)
+    rocketchat = fields.StringField(required=True)
 
 # ------------------------------------------------------------
 

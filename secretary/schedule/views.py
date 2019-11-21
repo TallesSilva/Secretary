@@ -137,18 +137,19 @@ def AgendamentoAutomatico(request):
 
             for backlog in backlogs:
                 params = {'include_events': 'ALL',
-                      'output_channel': 'telegram',
+                      'output_channel': 'rocketchat', #telegram ou rocketchat
                       }
-                conversation_id = backlog.customer.contato.telegram
+                # conversation_id = backlog.customer.contato.telegram
+                conversation_id = backlog.customer.contato.rocketchat
                 payload = {"name": "action_initialize"}
                 backlog_number = str(backlog.id)
                 payload_mes = {"text": backlog_number,
                                "sender": "user"}
-                r2 = requests.post('http://192.168.0.190:5005/conversations/{}/messages'.format(conversation_id),
+                r2 = requests.post('http://localhost:5005/conversations/{}/messages'.format(conversation_id),
                                    params = params,
                                    data = dumps(payload_mes))
                 print(r2)
-                r = requests.post('http://192.168.0.190:5005/conversations/{}/execute'.format(conversation_id),
+                r = requests.post('http://localhost:5005/conversations/{}/execute'.format(conversation_id),
                                   params = params,
                                   data = dumps(payload))
                 print('AgendamentoAutomatico2') 
