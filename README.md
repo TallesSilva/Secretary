@@ -9,4 +9,6 @@ O codigo do bot pode ser consultado em: https://github.com/ruiconti/scheduler-ag
 ### Execução do serviço: 
 ``` bash
 python manage.py runserver localhost:8080
+
+sdfçsdkfosdkjfpodsjk
 ```
