@@ -1,0 +1,44 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<div class="container contact-form">
+
+            <form action="Form" method="post">
+                    {% csrf_token %}
+                <h4>Acrescente contextos para nosso bot</h4>
+               <div class="row" >
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="text" name="txtName" class="form-control" placeholder="Nome *" style="width: 100%;" />
+                        </div>
+                
+                        <div class="form-group">
+                            <input type="text" name="txtAssunto" class="form-control" placeholder="Assunto: (exemplo: Duvida sobre o ponto, Informação sobre férias ...) *" style="width: 100%;" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea name="txtUsuário" class="form-control" placeholder="Pergunta do usuário *" style=" height: 250px;"></textarea>
+                        </div>
+                    </div>  
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea name="txtBot" class="form-control" placeholder="Resposta do Bot *" style=" height: 250px;"></textarea>
+                        </div>
+                    </div>               
+                </div>
+                <input type="submit" name="btnSubmit" class="btnContact" value="Send Message" style="margin-bottom: 1rem; box-sizing: border-box">
+            </form> 
+</div>
+   
+              
+
+<form  method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+        
