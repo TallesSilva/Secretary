@@ -120,6 +120,6 @@ class Backlog(Document):
 class Form(Document):
     meta = {'strict': False}
 
-    Assunto = StringField(required=True)
-    Pergunta = StringField(required=True)
-    Resposta = StringField(required=True)
+    Assunto = fields.StringField(required=True)
+    Pergunta = fields.StringField(required=True)
+    Resposta = fields.StringField(required=True)
