@@ -20,13 +20,7 @@ def index(request):
     qtd_equipe = Supplier.objects.count()
     qtd_finalizadas = TimeTable.objects.filter(status = 'Finalizada').count()
     qtd_backlog = Backlog.objects.count()
-    qtd_confirmados = TimeTable.objects.filter(status='Confirmado').count()
-    qtd_reagendados = TimeTable.objects.filter(status='Reagendado').count()
-    qtd_inconclusivos = TimeTable.objects.filter(status='Inconclusivo').count()
-    qtd_cancelados_cli = TimeTable.objects.filter(status='Revogado').count()
-    qtd_cancelados_sis = TimeTable.objects.filter(status='Interrompida').count()
-    qtd_execucao = TimeTable.objects.filter(status='Acontecendo').count()
-    qtd_pendentes = TimeTable.objects.filter(status='Pendente').count()
+    qtd_Perguntadentes = TimeTable.objects.filter(status='Pendente').count()
     qtd_pendentes = qtd_confirmados + qtd_reagendados + qtd_inconclusivos + qtd_execucao + qtd_pendentes
     qtd_canceladas = qtd_cancelados_cli + qtd_cancelados_sis
     AgendamentoAutomatico = False
@@ -229,12 +223,14 @@ def Clientes(request):
     }
     return HttpResponse(template.render(context, request))
 
+def Form(request):
+    template = loader.get_template('schedule/Form.html')
 
+    customers = Form.objects()
 
-   
+    context = {
+        'customers': customers
+    }
 
-
-
-    
-
+    return HttpResponse(template.render(context, request))
 

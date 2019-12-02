@@ -115,3 +115,11 @@ class Backlog(Document):
     observacao = fields.StringField(required=False)
     deadline_start_date = fields.StringField(required=False)
     deadline_end_date = fields.StringField(required=False)
+
+
+class Form(Document):
+    meta = {'strict': False}
+
+    Assunto = StringField(required=True)
+    Pergunta = StringField(required=True)
+    Resposta = StringField(required=True)

@@ -10,4 +10,5 @@ urlpatterns = [
     path('Calendario/', views.Calendario, name='Calendario'),
     path('AgendamentoAutomatico/', views.AgendamentoAutomatico, name='AgendamentoAutomatico'),    
     path('Clientes/', views.Clientes, name='Clientes'),
+    path('Formulario/'), views.Form, name='Formulario'
 ]
