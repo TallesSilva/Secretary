@@ -168,7 +168,7 @@ ufw==0.36
 ujson==1.35
 unattended-upgrades==0.1
 uritemplate==3.0.0
-urllib3==1.25.7
+urllib3==1.25.8
 uvloop==0.14.0
 wcwidth==0.1.7
 webexteamssdk==1.2
