@@ -103,7 +103,7 @@ pycparser==2.19
 pycrypto==2.6.1
 pydot==1.4.1
 pygobject==3.26.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pykwalify==1.7.0
 pymongo==3.9.0
 pyOpenSSL==17.5.0
