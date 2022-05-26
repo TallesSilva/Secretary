@@ -165,7 +165,7 @@ Twisted==17.9.0
 typing-extensions==3.7.4.1
 tzlocal==2.0.0
 ufw==0.36
-ujson==1.35
+ujson==5.2.0
 unattended-upgrades==0.1
 uritemplate==3.0.0
 urllib3==1.25.7
